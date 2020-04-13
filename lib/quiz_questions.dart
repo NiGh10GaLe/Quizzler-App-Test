@@ -1,6 +1,8 @@
 import 'question.dart';
 
 class QuizQuestions {
+  int _quesNum = 0;
+
   List<Question> _questions = [
     Question(
       'You can lead a cow down stairs but not up stairs.',
@@ -49,15 +51,19 @@ class QuizQuestions {
     ),
   ];
 
-  int questionsLength() {
-    return _questions.length;
+  void nextQues() {
+    if (_quesNum < _questions.length - 1) {
+      _quesNum++;
+      print(_questions.length);
+      print(_quesNum);
+    }
   }
 
-  String theQuesTxt(quesNum) {
-    return _questions[quesNum].quesText;
+  String theQuesTxt() {
+    return _questions[_quesNum].quesText;
   }
 
-  bool theQuesAnsr(quesNum) {
-    return _questions[quesNum].quesAnsr;
+  bool theQuesAnsr() {
+    return _questions[_quesNum].quesAnsr;
   }
 }
