@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'quiz_quistions.dart';
 
 void main() => runApp(Quizzler());
 
@@ -28,40 +28,10 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   // We can use (( List<Icon> scoreKeeper = [ )) if the contents into it will be only icons
   List<Icon> scoreKeeper = [];
-
-  // List<String> questions = [
-  //   '1. You can lead a cow down stairs but not up stairs.',
-  //   '2. Approximately one quarter of human bones are in the feet.',
-  //   '3. A slug\'s blood is green.',
-  //   '4. You can lead a cow down stairs but not up stairs.',
-  //   '5. Approximately one quarter of human bones are in the feet.',
-  //   '6. A slug\'s blood is green.'
-  // ];
-  // List<bool> answers = [
-  //   true,
-  //   true,
-  //   false,
-  //   true,
-  //   true,
-  //   false,
-  // ];
-
-  List<Question> questions = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: true),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: true),
-    Question(q: 'A slug\'s blood is green.', a: false),
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: true),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: true),
-    Question(q: 'A slug\'s blood is green.', a: false),
-  ];
-  int questionNumber = 0;
+  int quesNum = 0;
   void updateQ() {
-    questionNumber++;
-    print(questionNumber);
+    quesNum++;
+    print(quesNum);
   }
 
   @override
@@ -76,7 +46,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber].questionText,
+                questions[quesNum].quesText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -100,8 +70,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (questionNumber < questions.length - 1) {
-                    if (questions[questionNumber].questionAnswer == true) {
+                  if (quesNum < questions.length - 1) {
+                    if (questions[quesNum].quesAnsr == true) {
                       scoreKeeper.add(
                         Icon(
                           Icons.check,
@@ -137,8 +107,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (questionNumber < questions.length - 1) {
-                    if (questions[questionNumber].questionAnswer == false) {
+                  if (quesNum < questions.length - 1) {
+                    if (questions[quesNum].quesAnsr == false) {
                       scoreKeeper.add(
                         Icon(
                           Icons.check,
