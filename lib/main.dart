@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'quiz_quistions.dart';
+import 'quiz_questions.dart';
 
+QuizQuestions quizQuestions = QuizQuestions();
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -46,7 +47,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[quesNum].quesText,
+                quizQuestions.theQuesTxt(quesNum),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -70,8 +71,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (quesNum < questions.length - 1) {
-                    if (questions[quesNum].quesAnsr == true) {
+                  if (quesNum < quizQuestions.questionsLength() - 1) {
+                    if (quizQuestions.theQuesAnsr(quesNum) == true) {
                       scoreKeeper.add(
                         Icon(
                           Icons.check,
@@ -107,8 +108,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (quesNum < questions.length - 1) {
-                    if (questions[quesNum].quesAnsr == false) {
+                  if (quesNum < quizQuestions.questionsLength() - 1) {
+                    if (quizQuestions.theQuesAnsr(quesNum) == false) {
                       scoreKeeper.add(
                         Icon(
                           Icons.check,
@@ -137,9 +138,3 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
-
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
