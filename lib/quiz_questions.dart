@@ -54,7 +54,6 @@ class QuizQuestions {
   void nextQues() {
     if (_quesNum < _questions.length - 1) {
       _quesNum++;
-      print(_questions.length);
       print(_quesNum);
     }
   }
