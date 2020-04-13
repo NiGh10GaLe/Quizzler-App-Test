@@ -29,6 +29,31 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   // We can use (( List<Icon> scoreKeeper = [ )) if the contents into it will be only icons
   List<Icon> scoreKeeper = [];
+  int quesAnsrNumb = 0;
+
+  void checkAnswer(bool pressedAnswer) {
+    setState(() {
+      if (quesAnsrNumb < quizQuestions.quesLength()) {
+        quesAnsrNumb++;
+        if (quizQuestions.theQuesAnsr() == pressedAnswer) {
+          scoreKeeper.add(
+            Icon(
+              Icons.check,
+              color: Colors.green,
+            ),
+          );
+        } else {
+          scoreKeeper.add(
+            Icon(
+              Icons.close,
+              color: Colors.red,
+            ),
+          );
+        }
+      }
+      quizQuestions.nextQues();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,24 +90,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                setState(() {
-                  if (quizQuestions.theQuesAnsr() == true) {
-                    scoreKeeper.add(
-                      Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                    );
-                  } else {
-                    scoreKeeper.add(
-                      Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      ),
-                    );
-                  }
-                  quizQuestions.nextQues();
-                });
+                checkAnswer(true);
               },
             ),
           ),
@@ -100,24 +108,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                setState(() {
-                  if (quizQuestions.theQuesAnsr() == false) {
-                    scoreKeeper.add(
-                      Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                    );
-                  } else {
-                    scoreKeeper.add(
-                      Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      ),
-                    );
-                  }
-                  quizQuestions.nextQues();
-                });
+                checkAnswer(false);
               },
             ),
           ),
