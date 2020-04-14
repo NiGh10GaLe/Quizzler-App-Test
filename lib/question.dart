@@ -1,11 +1,9 @@
 class Question {
   String quesText;
   bool quesAnsr;
-  int quesDegree;
 
-  Question(String qTxt, bool qAnsr, int qDeg) {
+  Question(String qTxt, bool qAnsr) {
     quesText = qTxt;
     quesAnsr = qAnsr;
-    quesDegree = qDeg;
   }
 }

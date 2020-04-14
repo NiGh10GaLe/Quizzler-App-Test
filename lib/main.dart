@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'quiz_questions.dart';
 
 QuizQuestions quizQuestions = QuizQuestions();
@@ -27,14 +28,13 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  // We can use (( List<Icon> scoreKeeper = [ )) if the contents into it will be only icons
   List<Icon> scoreKeeper = [];
-  int quesAnsrNumb = 0;
+  int count = 0;
 
   void checkAnswer(bool pressedAnswer) {
     setState(() {
-      if (quesAnsrNumb < quizQuestions.quesLength()) {
-        quesAnsrNumb++;
+      if (count < quizQuestions.quesLength()) {
+        count++;
         if (quizQuestions.theQuesAnsr() == pressedAnswer) {
           scoreKeeper.add(
             Icon(
@@ -50,6 +50,30 @@ class _QuizPageState extends State<QuizPage> {
             ),
           );
         }
+      } else {
+        Alert(
+          context: context,
+          type: AlertType.info,
+          title: "Quiz Finished",
+          desc: "Tap RESET button below to start again",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "RESET",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                setState(() {
+                  quizQuestions.reset();
+                  scoreKeeper.clear();
+                  count = 0;
+                });
+              },
+              width: 120,
+            )
+          ],
+        ).show();
       }
       quizQuestions.nextQues();
     });
